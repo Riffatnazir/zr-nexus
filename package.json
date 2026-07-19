@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build && node -e \"const fs=require('fs'); if(fs.existsSync('dist/client')){fs.cpSync('dist/client', '.vercel/output/static', {recursive: true})}\"",
+    "build": "vite build && node --input-type=module -e \"import{cpSync,existsSync}from 'fs';if(existsSync('dist/client'))cpSync('dist/client','.vercel/output/static',{recursive:true})\"",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
