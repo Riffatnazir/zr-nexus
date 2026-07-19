@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [
     tsconfigPaths(),
     tanstackStart({ server: { entry: "server" } }),
-    nitro(),
+    nitro({ preset: "vercel" }),
     TanStackRouterVite({ target: 'react', autoCodeSplitting: true }),
     react()
   ],
