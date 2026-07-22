@@ -1,3 +1,5 @@
+rmSync(".vercel/output", { recursive: true, force: true });
+rmSync("dist", { recursive: true, force: true });
 import { execSync } from "child_process";
 import { existsSync, readdirSync, cpSync, mkdirSync } from "fs";
 
