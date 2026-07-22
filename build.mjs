@@ -1,7 +1,10 @@
+import { execSync } from "child_process";
+import { existsSync, readdirSync, cpSync, mkdirSync, rmSync } from "fs";
+
+console.log("🧹 Clearing previous build output...");
 rmSync(".vercel/output", { recursive: true, force: true });
 rmSync("dist", { recursive: true, force: true });
-import { execSync } from "child_process";
-import { existsSync, readdirSync, cpSync, mkdirSync } from "fs";
+console.log("✅ Cleared .vercel/output and dist");
 
 console.log("🔨 Starting build...");
 console.log("CWD:", process.cwd());
@@ -22,7 +25,6 @@ const checks = [
 
 for (const p of checks) {
   const exists = existsSync(p);
-  const count = exists && !p.includes(".") ? "?" : exists ? readdirSync(p).length + " files" : "missing";
   console.log(`  ${exists ? "✅" : "❌"} ${p}${exists ? ` (${readdirSync(p).length} files)` : " (missing)"}`);
 }
 
@@ -46,7 +48,6 @@ for (const src of sources) {
 }
 
 if (!copied) {
-  // Check if static already has files from nitro
   if (existsSync(`${dest}/assets`)) {
     const cssFiles = readdirSync(`${dest}/assets`).filter((f) => f.endsWith(".css"));
     if (cssFiles.length > 0) {
